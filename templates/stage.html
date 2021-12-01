@@ -1,0 +1,65 @@
+{% extends "main.html" %}
+{% block meta %}
+<!-- Primary Meta Tags -->
+<title> stage </title>
+<meta name="title" content="stage">
+<meta name="description" content="3la bal -ابحث في هذه الصفحة عن جميع عروض التدريب">
+<meta name="keywords" content="">
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="anapec">
+<meta property="og:description" content="3la bal -ابحث في هذه الصفحة عن جميع عروض التدريب ">
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="stage">
+<meta property="twitter:description" content="3la bal -ابحث في هذه الصفحة عن جميع عروض التدريب">
+{% endblock %}
+{% block content %}
+<div class="col-xl-8  grid-margin  ">
+    <div class="row infinite-container">
+        <div class=" ">
+            <h1 class='text-white bg-secondary p-3 h2 my-3'> stage</h1>
+            {% for post in one %}
+            <div class="item col-md-12">
+                <a href="{% url 'article' post.slug %}" class="angled-img">
+                    <div class=" img m-0 img-offset">
+                        <img src="{{post.la_photo.url}}" alt="cart image">
+                        <div class="badge show bg-success ">{{post.sub}}</div>
+                        <div class="fw-bolder badgeright show bg-danger">{{post.date_expiration}} !!</div>
+                    </div>
+                    <div class="py-1 bg-dark shadow-lg">
+                        <h3 class="  text-center mx-5 py-2 h4">{{post.le_nom}}</h3>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+
+        </div>
+        <hr>
+        {% for post in Post %}
+        <div class="item   infinite-item  p-2 col-md-6">
+            <a href="{% url 'article' post.slug %}" class="angled-img">
+                <div class=" img m-0 img-offset">
+                    <img src="{{post.la_photo.url}}" alt="cart image">
+                    <div class="badge show bg-success ">{{post.sub}}</div>
+                    <div class="fw-bolder badgeright show bg-danger">{{post.date_expiration}} !!</div>
+                </div>
+                <div class=" bg-dark shadow-lg py-1">
+                    <h3 class="   text-center mx-5 py-2 h4">{{post.le_nom}}</h3>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+        {% if Post.has_next %}
+        <a class="infinite-more-link" href="?page={{ Post.next_page_number }}">this work</a>
+        {% endif %}
+        <div class="d-flex justify-content-center" style="display:none;">
+            <div class="spinner-border text-primary h1" role="status">
+                <span class="sr-only"><span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
